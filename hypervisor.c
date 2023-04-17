@@ -30,11 +30,11 @@ MODULE_VERSION("0.0.1");
 #define MYPAGE_SIZE 4096
 #define X86_CR4_VMXE_BIT 13 // enable VMX virtualization
 #define X86_CR4_VMXE _BITUL(X86_CR4_VMXE_BIT)
-#define FEATURE_CONTROL_VMXON_ENABLED_OUTSIDE_SMX (1 << 2)
-#define FEATURE_CONTROL_LOCKED (1 << 0)
+// #define FEATURE_CONTROL_VMXON_ENABLED_OUTSIDE_SMX (1 << 2)
+// #define FEATURE_CONTROL_LOCKED (1 << 0)
 #define MSR_IA32_FEATURE_CONTROL 0x0000003a
 #define EAX_EDX_VAL(val, low, high) ((low) | (high) << 32)
-#define EAX_EDX_RET(val, low, high) "=a"(low), "=d"(high)
+// #define EAX_EDX_RET(val, low, high) "=a"(low), "=d"(high)
 #define MSR_IA32_VMX_CR0_FIXED0 0x00000486
 #define MSR_IA32_VMX_CR0_FIXED1 0x00000487
 #define MSR_IA32_VMX_CR4_FIXED0 0x00000488
