@@ -123,7 +123,7 @@ bool getVmxOperation(void) {
 // looking for CPUID.1:ECX.VMX[bit 5] = 1
 bool vmxSupport(void) {
   int getVmxSpport, vmxBit;
-  __asm__("mov $1, %%rax");
+  __asm__("mov $1, %rax");
   __asm__("cpuid");
   __asm__("mov %%ecx , %0\n\t" : "=r"(getVmxSpport));
   vmxBit = (getVmxSpport >> 5) & 1;
