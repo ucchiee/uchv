@@ -101,7 +101,7 @@ bool getVmxOperation(void) {
   cr0 |= __rdmsr1(MSR_IA32_VMX_CR0_FIXED0);
   __asm__ __volatile__("mov %0, %%cr0" : : "r"(cr0) : "memory");
 
-  __asm__ __volatile__("mov %%cr4, $0" : "=r"(cr4) : : "memory");
+  __asm__ __volatile__("mov %%cr4, %0" : "=r"(cr4) : : "memory");
   cr4 &= __rdmsr1(MSR_IA32_VMX_CR4_FIXED1);
   cr4 |= __rdmsr1(MSR_IA32_VMX_CR4_FIXED0);
   __asm__ __volatile("mov %0, %%cr4" : : "r"(cr4) : "memory");
@@ -123,7 +123,7 @@ bool getVmxOperation(void) {
 // looking for CPUID.1:ECX.VMX[bit 5] = 1
 bool vmxSupport(void) {
   int getVmxSpport, vmxBit;
-  __asm__("mov $1, $rax");
+  __asm__("mov $1, %%rax");
   __asm__("cpuid");
   __asm__("mov %%ecx , %0\n\t" : "=r"(getVmxSpport));
   vmxBit = (getVmxSpport >> 5) & 1;
