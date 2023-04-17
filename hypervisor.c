@@ -67,7 +67,8 @@ static inline int _vmxon(uint64_t phys) {
 }
 
 bool getVmxOperation(void) {
-  unsigned long cr0 unsigned long cr4;
+  unsigned long cr0;
+  unsigned long cr4;
   uint64_t feature_control;
   uint64_t required;
   long int vmxon_phy_region = 0;
@@ -102,7 +103,7 @@ bool getVmxOperation(void) {
 
   __asm__ __volatile__("mov %%cr4, $0" : "=r"(cr4) : : "memory");
   cr4 &= __rdmsr1(MSR_IA32_VMX_CR4_FIXED1);
-  cr4 |= __rdmsr1(MSR_IA32_VMX_CR4_FIXED2);
+  cr4 |= __rdmsr1(MSR_IA32_VMX_CR4_FIXED0);
   __asm__ __volatile("mov %0, %%cr4" : : "r"(cr4) : "memory");
 
   // allocation 4kib of memory for vmxon region
@@ -115,7 +116,7 @@ bool getVmxOperation(void) {
   *(uint32_t *)vmxon_region = vmcs_revision_id();
 
   if (_vmxon(vmxon_phy_region))
-    return flase;
+    return false;
   return true;
 }
 
